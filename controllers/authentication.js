@@ -5,6 +5,10 @@ exports.signup = async (req, res, next) => {
 		const email = req.body.email;
 		const password = req.body.password;
 
+		if(!email || !password) {
+			return res.status(422).send({error: 'You must provide email and password'})
+		}
+
 		// See if a user with the given email exists
 		const existingUser = await User.findOne({ email });
 
@@ -18,7 +22,7 @@ exports.signup = async (req, res, next) => {
 
 		// Respond to request indicating the user was created
 		res.json({ success: true });
-		
+
 	} catch (err) {
 		res.status(400).send(err);
 	}
