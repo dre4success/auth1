@@ -4,11 +4,17 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const app = express();
 const router = require('./routes/router');
+const mongoose = require('mongoose');
 
+//DB Setup
+mongoose.connect('mongodb://localhost/auth', {
+	useMongoClient: true
+})
 
 // App Setup
 app.use(morgan('combined')); // logging incoming request
-app.use(bodyParser.json({type: '*/*'})) // parse incoming request no matter what the type is
+app.use(bodyParser.json()) // parse incoming request no matter what the type is
+app.use(bodyParser.urlencoded({extended: true}))
 router(app);
 
 //Server Setup
