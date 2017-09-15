@@ -6,7 +6,8 @@ const app = express();
 
 
 // App Setup
-
+app.use(morgan('combined')); // logging incoming request
+app.use(bodyParser.json({type: '*/*'})) // parse incoming request no matter what the type is
 
 
 //Server Setup
