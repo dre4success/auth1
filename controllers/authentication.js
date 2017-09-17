@@ -23,11 +23,11 @@ exports.signup = async (req, res, next) => {
 		}
 
 		// See if a user with the given email exists
-		const existingUser = await User.findOne({ email });
+		const existingUser = await User.findOne({ email }).exec();
 
 		// If a user with email does exist, return an error
 		if (existingUser) {
-			return res.status(422).send({ error: 'Email already exists' });
+			res.status(422).send({ error: 'Email already exists' });
 		}
 
 		// If a user with email does Not exist, create and save user record

@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const app = express();
 const router = require('./routes/router');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 //DB Setup
 mongoose.connect('mongodb://localhost/auth', {
@@ -13,6 +14,7 @@ mongoose.connect('mongodb://localhost/auth', {
 
 // App Setup
 app.use(morgan('combined')); // logging incoming request
+app.use(cors());
 app.use(bodyParser.json()) // parse incoming request no matter what the type is
 app.use(bodyParser.urlencoded({extended: true}))
 router(app);
